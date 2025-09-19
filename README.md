@@ -22,7 +22,7 @@
 
 ---
 
-## �� English
+## 🇺🇸 English
 
 <div align="center">
 
@@ -270,59 +270,6 @@ batcher = TurboBatcher(
 
 ---
 
-### 🎮 **Interactive Demos**
-
-Try our examples to see TurboBatch in action:
-
-```bash
-# 🎯 Quick sentiment analysis demo
-python examples/sentiment_analysis_demo.py
-
-# 🏆 Comprehensive benchmarking
-python examples/advanced_benchmarking_demo.py
-
-# 📚 Jupyter notebook tutorial
-jupyter notebook examples/DynamicBatcher_Tutorial.ipynb
-```
-
----
-
-### 🤝 **Contributing**
-
-<div align="center">
-
-**🌟 We love contributions! Join our community!**
-
-</div>
-
-1. **🍴 Fork** the repository
-2. **🌿 Create** your feature branch: `git checkout -b feature/amazing-feature`
-3. **💾 Commit** your changes: `git commit -m 'Add amazing feature'`
-4. **🚀 Push** to the branch: `git push origin feature/amazing-feature`
-5. **🎯 Open** a Pull Request
-
-<div align="center">
-
-**📋 [Contributing Guidelines](CONTRIBUTING.md) • 🐛 [Report Issues](https://github.com/Shayanthn/turbobatch/issues) • 💡 [Feature Requests](https://github.com/Shayanthn/turbobatch/discussions)**
-
-</div>
-
----
-
-### ⭐ **Support the Project**
-
-<div align="center">
-
-If TurboBatch helped you, please consider:
-
-[![Star this repo](https://img.shields.io/badge/⭐-Star%20this%20repo-yellow?style=for-the-badge&logo=github)](https://github.com/Shayanthn/turbobatch)
-[![Share on Twitter](https://img.shields.io/badge/📢-Share%20on%20Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/intent/tweet?text=Check%20out%20TurboBatch%20for%2010x%20faster%20transformer%20inference!&url=https://github.com/Shayanthn/turbobatch)
-[![Buy me a coffee](https://img.shields.io/badge/☕-Buy%20me%20a%20coffee-orange?style=for-the-badge&logo=buy-me-a-coffee&logoColor=white)](https://www.buymeacoffee.com/shayanthn)
-
-</div>
-
----
-
 ## 🇮🇷 فارسی
 
 <div align="center" dir="rtl">
@@ -349,8 +296,6 @@ If TurboBatch helped you, please consider:
 </div>
 
 ---
-
-<div align="right" dir="rtl">
 
 ### ✨ **ویژگی‌های کلیدی**
 
@@ -399,184 +344,6 @@ If TurboBatch helped you, please consider:
 
 ---
 
-### 🚀 **نصب سریع**
-
-```bash
-# نصب از PyPI (توصیه می‌شود)
-pip install turbobatch
-```
-
-<details>
-<summary>📦 <strong>نصب توسعه‌دهنده</strong></summary>
-
-```bash
-# کلون کردن مخزن
-git clone https://github.com/Shayanthn/turbobatch.git
-cd turbobatch
-
-# نصب در حالت توسعه
-pip install -e .
-```
-
-</details>
-
----
-
-### 💻 **مثال شروع سریع**
-
-<div align="center">
-
-**🎯 تحلیل احساسات در فقط 3 مرحله!**
-
-</div>
-
-```python
-from transformers import AutoTokenizer, AutoModelForSequenceClassification
-from turbobatch import TurboBatcher
-
-# 1️⃣ بارگذاری مدل
-tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased-finetuned-sst-2-english")
-model = AutoModelForSequenceClassification.from_pretrained("distilbert-base-uncased-finetuned-sst-2-english")
-
-# 2️⃣ ایجاد TurboBatcher
-batcher = TurboBatcher(
-    model=model,
-    tokenizer=tokenizer,
-    max_batch_size=32,
-    adaptive_batching=True
-)
-
-# 3️⃣ پردازش متن‌ها با سرعت نور!
-texts = [
-    "این محصول فوق‌العاده است!",
-    "تجربه بدی بود.",
-    "کیفیت خوبی دارد و قیمت مناسب.",
-    "خیلی راضی هستم از خرید!"
-]
-
-results = batcher.predict(texts)
-
-# 🎉 مشاهده نتایج
-for text, result in zip(texts, results):
-    sentiment = "مثبت 😊" if result.label == 1 else "منفی 😞"
-    print(f"📝 {text}")
-    print(f"🎯 {sentiment} (اطمینان: {result.score:.2%})")
-    print("─" * 50)
-```
-
----
-
-### 📈 **مقایسه عملکرد**
-
-<div align="center">
-
-| روش | ⏱️ زمان | 🚀 توان عملیاتی | 💾 حافظه | 📊 کارایی |
-|-----|---------|------------------|-----------|-----------|
-| **🏆 TurboBatch** | **4.5ثانیه** | **222 نمونه/ثانیه** | **کم** | **★★★★★** |
-| Batch سنتی | 12.3ثانیه | 81 نمونه/ثانیه | زیاد | ★★★☆☆ |
-| متوالی | 45.2ثانیه | 22 نمونه/ثانیه | متوسط | ★☆☆☆☆ |
-
-*📊 بنچمارک: 1000 متن روی NVIDIA RTX 3080*
-
-</div>
-
----
-
-### 🎯 **مثال‌های کاربرد پیشرفته**
-
-<details>
-<summary><strong>🔥 سرویس API با کارایی بالا</strong></summary>
-
-```python
-from flask import Flask, request, jsonify
-from turbobatch import TurboBatcher
-
-app = Flask(__name__)
-
-class SentimentAPI:
-    def __init__(self):
-        self.batcher = TurboBatcher(model, tokenizer, max_batch_size=64)
-    
-    def analyze_batch(self, texts):
-        return self.batcher.predict(texts)
-
-api = SentimentAPI()
-
-@app.route('/analyze', methods=['POST'])
-def analyze():
-    texts = request.json.get('texts', [])
-    results = api.analyze_batch(texts)
-    return jsonify({
-        'predictions': [{'text': t, 'sentiment': r.label, 'confidence': r.score} 
-                       for t, r in zip(texts, results)]
-    })
-```
-
-</details>
-
-<details>
-<summary><strong>📊 پایپ‌لاین پردازش CSV</strong></summary>
-
-```python
-import pandas as pd
-from tqdm import tqdm
-
-# خواندن فایل CSV بزرگ
-df = pd.read_csv("customer_reviews.csv")
-texts = df['review_text'].tolist()
-
-# پردازش با نوار پیشرفت
-print("🔄 در حال پردازش نظرات...")
-results = batcher.predict(texts)
-
-# اضافه کردن پیش‌بینی‌ها به dataframe
-df['sentiment'] = [r.label for r in results]
-df['confidence'] = [r.score for r in results]
-df['emotion'] = df['sentiment'].map({1: 'مثبت 😊', 0: 'منفی 😞'})
-
-print(f"✅ {len(results)} نظر با موفقیت پردازش شد!")
-```
-
-</details>
-
-<details>
-<summary><strong>📈 مانیتورینگ عملکرد</strong></summary>
-
-```python
-# دریافت آمار دقیق عملکرد
-stats = batcher.get_performance_stats()
-
-print("📊 داشبورد عملکرد")
-print("=" * 40)
-print(f"🔢 کل batch های پردازش شده: {stats['total_batches']}")
-print(f"🚀 متوسط توان عملیاتی: {stats['throughput']:.2f} نمونه/ثانیه")
-print(f"💾 نرخ برخورد کش: {stats['cache_hit_rate']:.1%}")
-print(f"⚡ متوسط اندازه batch: {stats['avg_batch_size']:.1f}")
-print(f"🕐 کل زمان پردازش: {stats['total_processing_time']:.2f}ثانیه")
-```
-
-</details>
-
----
-
-### 🔧 **پیکربندی پیشرفته**
-
-```python
-batcher = TurboBatcher(
-    model=model,
-    tokenizer=tokenizer,
-    max_batch_size=32,              # 📏 حداکثر اندازه batch
-    timeout_ms=100,                 # ⏰ تایم‌اوت تشکیل batch
-    adaptive_batching=True,         # 🧠 تنظیم هوشمند اندازه batch
-    performance_monitoring=True,    # 📊 فعال‌سازی ردیابی عملکرد
-    enable_caching=True,           # 🔄 کش کردن پیش‌بینی‌های تکراری
-    device="cuda",                 # 🖥️ شتاب GPU
-    max_sequence_length=512        # 📝 حداکثر طول متن
-)
-```
-
----
-
 ### 🎮 **دمو‌های تعاملی**
 
 مثال‌های ما را امتحان کنید تا TurboBatch را در عمل ببینید:
@@ -591,44 +358,6 @@ python examples/advanced_benchmarking_demo.py
 # 📚 آموزش Jupyter notebook
 jupyter notebook examples/DynamicBatcher_Tutorial.ipynb
 ```
-
----
-
-### 🤝 **مشارکت**
-
-<div align="center">
-
-**🌟 ما عاشق مشارکت هستیم! به جامعه ما بپیوندید!**
-
-</div>
-
-1. **🍴 Fork** کنید مخزن را
-2. **🌿 ایجاد** کنید شاخه ویژگی: `git checkout -b feature/amazing-feature`
-3. **💾 Commit** کنید تغییرات: `git commit -m 'Add amazing feature'`
-4. **🚀 Push** کنید به شاخه: `git push origin feature/amazing-feature`
-5. **🎯 باز** کنید Pull Request
-
-<div align="center">
-
-**📋 [راهنمای مشارکت](CONTRIBUTING.md) • 🐛 [گزارش مشکلات](https://github.com/Shayanthn/turbobatch/issues) • 💡 [درخواست ویژگی](https://github.com/Shayanthn/turbobatch/discussions)**
-
-</div>
-
----
-
-### ⭐ **حمایت از پروژه**
-
-<div align="center">
-
-اگر TurboBatch به شما کمک کرد، لطفاً در نظر بگیرید:
-
-[![ستاره دادن به این مخزن](https://img.shields.io/badge/⭐-ستاره_دادن_به_این_مخزن-yellow?style=for-the-badge&logo=github)](https://github.com/Shayanthn/turbobatch)
-[![اشتراک در توییتر](https://img.shields.io/badge/📢-اشتراک_در_توییتر-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/intent/tweet?text=TurboBatch%20را%20برای%2010%20برابر%20سریع‌تر%20کردن%20inference%20چک%20کنید!&url=https://github.com/Shayanthn/turbobatch)
-[![یک قهوه برایم بخرید](https://img.shields.io/badge/☕-یک_قهوه_برایم_بخرید-orange?style=for-the-badge&logo=buy-me-a-coffee&logoColor=white)](https://www.buymeacoffee.com/shayanthn)
-
-</div>
-
-</div>
 
 ---
 
@@ -856,7 +585,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
   year = {2025},
   version = {1.0.0},
   url = {https://github.com/Shayanthn/turbobatch},
-  doi = {10.5281/zenodo.XXXXXXX}
+  
 }
 ```
 
