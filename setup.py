@@ -5,12 +5,15 @@ A high-performance dynamic batching library for transformer models
 """
 
 import os
-from setuptools import setup, find_packages
+
+from setuptools import find_packages, setup
+
 
 # Read the README file for long description
 def read_readme():
     with open("README.md", "r", encoding="utf-8") as fh:
         return fh.read()
+
 
 # Read requirements from requirements.txt
 def read_requirements():
@@ -25,12 +28,9 @@ def read_requirements():
                         requirements.append(line)
     except FileNotFoundError:
         # Fallback requirements if file doesn't exist
-        requirements = [
-            "torch>=1.9.0",
-            "transformers>=4.20.0", 
-            "numpy>=1.21.0"
-        ]
+        requirements = ["torch>=1.9.0", "transformers>=4.20.0", "numpy>=1.21.0"]
     return requirements
+
 
 setup(
     name="turbobatch",
@@ -83,7 +83,7 @@ setup(
         "all": [
             "pytest>=7.0.0",
             "black>=22.0.0",
-            "isort>=5.10.0", 
+            "isort>=5.10.0",
             "mypy>=0.991",
             "psutil>=5.9.0",
             "GPUtil>=1.4.0",
