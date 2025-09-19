@@ -34,10 +34,10 @@
 
 <div align="center">
 
-```diff
+
 - Before TurboBatch: 100 texts → 45 seconds ⏰
 + After TurboBatch:  100 texts → 4.5 seconds ⚡
-```
+
 
 **🎉 That's a 10x speed improvement!**
 
