@@ -1,0 +1,11 @@
+# Core Dependencies
+torch>=1.9.0
+transformers>=4.20.0
+numpy>=1.21.0
+
+# Optional Development Dependencies
+# Install with: pip install .[dev]
+# pytest>=7.0.0
+# black>=22.0.0
+# isort>=5.10.0
+# mypy>=0.991
